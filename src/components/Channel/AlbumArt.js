@@ -6,7 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import { withRouter } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
 
@@ -65,14 +66,14 @@ const AlbumArt = props => {
                     </Typography>
                 </CardContent>
                 <div className={classes.controls}>
-                    <IconButton aria-label="previous">
-                        <SkipPreviousIcon />
+                    <IconButton aria-label="thumb-down">
+                        <ThumbDownIcon />
                     </IconButton>
                     <IconButton aria-label="play/pause">
                         <PlayArrowIcon className={classes.playIcon} />
                     </IconButton>
-                    <IconButton aria-label="next">
-                        <SkipNextIcon />
+                    <IconButton aria-label="thumb-up">
+                        <ThumbUpIcon />
                     </IconButton>
                 </div>
             </div>
