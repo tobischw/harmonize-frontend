@@ -9,13 +9,14 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 import Home from "./containers/Home";
+import Channel from "./containers/Channel";
 import Setting from "./containers/Setting";
 
 import MainLayout from "./layouts/MainLayout";
 import EmptyLayout from "./layouts/EmptyLayout";
 
 const NotFound = () => {
-  return <div>NotFound</div>;
+  return <div>Not Found</div>;
 };
 
 const DashboardRoute = ({ component: Component, ...rest }) => {
@@ -56,7 +57,7 @@ class App extends Component {
             <Switch>
               <DashboardRoute path="/dashboard" component={Home} />
               <DashboardRoute path="/setting" component={Setting} />
-              <DashboardRoute exact path="/" component={Home} />
+              <DashboardRoute exact path="/" component={Channel} />
               <EmptyRoute component={NotFound} />
             </Switch>
           </Router>

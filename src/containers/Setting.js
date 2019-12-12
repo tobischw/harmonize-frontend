@@ -13,7 +13,7 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { toggleThemeMode, swapThemeColors } from "../store/reducers/settings";
+import { toggleThemeMode } from "../store/reducers/settings";
 
 const Settings = props => (
   <div>
@@ -33,18 +33,6 @@ const Settings = props => (
               />
             </ListItemSecondaryAction>
           </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <CompareArrowsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Swap Colors" />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={(e, checked) => props.swapThemeColors(checked)}
-                checked={props.settings.colorsSwaped}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
         </List>
       </CardContent>
     </Card>
@@ -60,8 +48,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      toggleThemeMode: checked => toggleThemeMode(checked),
-      swapThemeColors: checked => swapThemeColors(checked)
+      toggleThemeMode: checked => toggleThemeMode(checked)
     },
     dispatch
   );

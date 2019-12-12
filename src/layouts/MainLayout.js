@@ -2,20 +2,31 @@ import React, { Fragment, Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 
-import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    height: "100%"
+  },
+  backdrop: {
+    boxSizing: "border-box",
+    position: "fixed",
+    zIndex: -1,
+    width: "100%",
+    height: "100%",
+    backgroundImage: "url('https://m.media-amazon.com/images/I/51NLJmj8YqL._SS500_.jpg')",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    filter: "blur(50px) grayscale(45%)"
   },
   content: {
     flexGrow: 1,
     marginLeft: theme.spacing.unit * 9,
     padding: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 7,
+    marginTop: theme.spacing.unit * 1,
     overflowX: "hidden"
   },
   contentShift: {
@@ -44,9 +55,7 @@ class MainLayout extends Component {
     return (
       <Fragment>
         <div className={classes.root}>
-          <Header
-            handleToggleDrawer={this.handleToggleDrawer}
-          />
+          <div className={classes.backdrop}></div>
           <main
             className={classNames(classes.content, {
               [classes.contentShift]: this.state.open

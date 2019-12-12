@@ -5,9 +5,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import DashboardIcon from "@material-ui/icons/Dashboard";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { Link } from "react-router-dom";
+import Avatar from '@material-ui/core/Avatar';
+import {withRouter} from 'react-router-dom';
+import Divider from '@material-ui/core/Divider';
+
+import { Link, NavLink } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
@@ -15,7 +18,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   drawerPaper: {
     position: "fixed",
-    top: theme.spacing.unit * 8,
+    top: 0,
     whiteSpace: "nowrap",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -38,32 +41,42 @@ const styles = theme => ({
 
 const Sidebar = props => {
   const { open, classes } = props;
+  const { pathname } = props.location;
   return (
     <Drawer
       variant="permanent"
       classes={{
         paper: classNames(
           classes.drawerPaper,
-          !open && classes.drawerPaperClose
+          classes.drawerPaperClose
         )
       }}
       open={open}
     >
       <List>
         <Link to="/">
-          <ListItem button>
+          <ListItem button selected={ pathname === '/'  }>
             <ListItemIcon>
-              <DashboardIcon />
+            <Avatar alt="CAOS" src="https://i1.sndcdn.com/avatars-000112634876-re19sl-t500x500.jpg" className={classes.avatar} />
             </ListItemIcon>
-            <ListItemText primary="Dashboard" />
+            <ListItemText primary="CAOS" />
           </ListItem>
         </Link>
-        <Link to="/setting">
+        <Link to="/c2">
           <ListItem button>
             <ListItemIcon>
-              <SettingsIcon />
+            <Avatar alt="CoolGang" src="https://yt3.ggpht.com/a/AGF-l7-F3yoiNOeKfZInROvXMbsVtRk0dAhleblQeg=s900-c-k-c0xffffffff-no-rj-mo" className={classes.avatar} />
             </ListItemIcon>
-            <ListItemText primary="Orders" />
+            <ListItemText primary="CAOS" />
+          </ListItem>
+        </Link>
+        <Divider />
+        <Link to="/setting">
+          <ListItem button selected={ pathname === '/setting'  }>
+            <ListItemIcon >
+              <SettingsIcon fontSize="large" />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
           </ListItem>
         </Link>
       </List>
@@ -71,4 +84,4 @@ const Sidebar = props => {
   );
 };
 
-export default withStyles(styles)(Sidebar);
+export default withRouter(withStyles(styles)(Sidebar));
