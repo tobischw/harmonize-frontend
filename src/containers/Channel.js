@@ -61,7 +61,7 @@ const Channel = props => {
           </Grid>
           <Grid container xs={12} alignContent="center" style={{height: "100%"}}>
             <Grid item xs={5}>
-              <AlbumArt />
+              <AlbumArt title="California Halo Blue" artist="AWOLNATION" withControls />
             </Grid>
             <Grid item xs={7}>
               

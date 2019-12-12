@@ -59,12 +59,13 @@ const AlbumArt = props => {
             <div className={classes.details}>
                 <CardContent className={classes.content}>
                     <Typography component="h5" variant="h5">
-                        An Awesome Wave
+                        { props.title }
                     </Typography>
                     <Typography variant="subtitle1" color="textSecondary">
-                        Alt-J
+                        { props.artist }
                     </Typography>
                 </CardContent>
+                { props.withControls &&
                 <div className={classes.controls}>
                     <IconButton aria-label="thumb-down">
                         <ThumbDownIcon />
@@ -76,6 +77,7 @@ const AlbumArt = props => {
                         <ThumbUpIcon />
                     </IconButton>
                 </div>
+                }
             </div>
         </Card>
     );
