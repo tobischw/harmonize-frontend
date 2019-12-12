@@ -26,7 +26,8 @@ const styles = theme => ({
     flexGrow: 1,
     marginLeft: theme.spacing.unit * 9,
     padding: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 1,
+    paddingTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 0,
     overflowX: "hidden"
   },
   contentShift: {

@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
+import Link from '@material-ui/core/Link';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -17,11 +18,15 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
 const styles = theme => ({
     root: {
-      display: 'flex'
+      display: 'flex',
+      height: '90%'
     },
     paper: {
       textAlign: 'center',
       color: theme.palette.text.secondary,
+    },
+    breadcrumbs: {
+      fontSize: 32
     }
 });
 
@@ -41,21 +46,18 @@ const Channel = props => {
     return (
         <Grid container className={classes.root}>
           <Grid container xs={12}>
-            
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-              Open Menu
-            </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
+            <Breadcrumbs separator="›" className={classes.breadcrumbs} aria-label="breadcrumb">
+              <Link color="inherit" href="/">
+                Cool Gang
+              </Link>         
+              <Link
+                color="textPrimary"
+                href="/components/breadcrumbs/"
+                aria-current="page"
+              >
+                indie
+              </Link>
+            </Breadcrumbs>
           </Grid>
           <Grid container xs={12} alignContent="center" style={{height: "100%"}}>
             <Grid item xs={5}>
