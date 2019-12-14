@@ -10,10 +10,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Switch from "@material-ui/core/Switch";
 import PaletteIcon from "@material-ui/icons/Palette";
 import Divider from '@material-ui/core/Divider';
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-
-import { toggleThemeMode } from "../store/reducers/settings";
 
 const Settings = props => (
   <div>
@@ -29,8 +25,7 @@ const Settings = props => (
             <ListItemText primary="Dark Mode" />
             <ListItemSecondaryAction>
               <Switch
-                onChange={(e, checked) => props.toggleThemeMode(checked)}
-                checked={props.settings.darkMode}
+              
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -40,22 +35,4 @@ const Settings = props => (
   </div>
 );
 
-const mapStateToProps = state => {
-  return {
-    settings: state.settings
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      toggleThemeMode: checked => toggleThemeMode(checked)
-    },
-    dispatch
-  );
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Settings);
+export default Settings;

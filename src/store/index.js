@@ -7,6 +7,4 @@ import reduxWebsocket from '@giantmachines/redux-websocket';
 // Create the middleware instance for web sockets.
 const reduxWebsocketMiddleware = reduxWebsocket();
 
-const middlewares = [reduxWebsocketMiddleware, logger]
-
-export default createStore(rootReducer, applyMiddleware(...middlewares));
+export default createStore(rootReducer, applyMiddleware(reduxWebsocketMiddleware, logger));

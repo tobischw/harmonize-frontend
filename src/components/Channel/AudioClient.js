@@ -16,7 +16,7 @@ class AudioClient extends React.Component {
 
 const mapStateToProps = state => {
     return {
-      client: state.client
+     // client: state.client
     };
   };
   

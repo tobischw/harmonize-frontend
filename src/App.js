@@ -15,6 +15,8 @@ import Setting from "./containers/Setting";
 import MainLayout from "./layouts/MainLayout";
 import EmptyLayout from "./layouts/EmptyLayout";
 
+import theme from "./theme"
+
 const NotFound = () => {
   return <div>Not Found</div>;
 };
@@ -46,11 +48,14 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 };
 
 class App extends Component {
-  render() {
-    const { settings } = this.props;
+  componentDidMount() {
+    //const { dispatch } = this.props
+    //dispatch
+  }
 
+  render() {
     return (
-      <MuiThemeProvider theme={settings.theme}>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <div style={{ height: "100vh" }}>
           <Router>
@@ -67,13 +72,21 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    settings: state.settings,
-  };
-};
+function mapStateToProps(state) {
+  /*const { selectedSubreddit, postsBySubreddit } = state
+  const { isFetching, lastUpdated, items: posts } = postsBySubreddit[
+    selectedSubreddit
+  ] || {
+    isFetching: true,
+    items: []
+  }
 
-export default connect(
-  mapStateToProps,
-  null
-)(App);
+  return {
+    selectedSubreddit,
+    posts,
+    isFetching,
+    lastUpdated
+  }*/
+}
+
+export default connect(mapStateToProps)(App)
