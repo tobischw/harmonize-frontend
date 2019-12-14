@@ -15,6 +15,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import AudioClient from "../components/Channel/AudioClient";
 
 const styles = theme => ({
     root: {
@@ -45,7 +46,7 @@ const Channel = props => {
 
     return (
         <Grid container className={classes.root}>
-          <Grid container xs={12}>
+          <Grid container>
             <Breadcrumbs separator="›" className={classes.breadcrumbs} aria-label="breadcrumb">
               <Link color="inherit" href="/">
                 Cool Gang
@@ -59,12 +60,12 @@ const Channel = props => {
               </Link>
             </Breadcrumbs>
           </Grid>
-          <Grid container xs={12} alignContent="center" style={{height: "100%"}}>
+          <Grid container alignContent="center" style={{height: "100%"}}>
             <Grid item xs={5}>
+              <AudioClient />
               <AlbumArt title="California Halo Blue" artist="AWOLNATION" withControls />
             </Grid>
             <Grid item xs={7}>
-              
             </Grid>
           </Grid>
         </Grid>

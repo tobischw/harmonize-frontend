@@ -1,10 +1,13 @@
 const initState = {
-    connected: false
+    connected: false,
+    clientName: '',
+    clientId: '',
+    sources: [],
+    realPosition: 0
 };
 
 export default function reducer(state = initState, action) {
     switch (action.type) {
-      /*case TOGGLE_THEME_MODE:*/
       default:
         return state;
     }

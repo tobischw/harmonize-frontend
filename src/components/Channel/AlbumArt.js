@@ -18,8 +18,8 @@ const styles = theme => ({
     card: {
         display: 'flex',
         flexDirection: 'column',
-        height: theme.spacing.unit * 64,
-        width:  theme.spacing.unit * 48
+        height: theme.spacing(64),
+        width:  theme.spacing(48)
     },
     details: {
         display: 'flex',
@@ -38,8 +38,8 @@ const styles = theme => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit
+        paddingLeft: theme.spacing,
+        paddingBottom: theme.spacing
     },
     playIcon: {
         height: 38,

@@ -1,9 +1,10 @@
 import settings from "./settings";
-import sync from "./sync"
+import client from "./client"
 import { combineReducers } from "redux";
 
 const reducers = combineReducers({
-  settings
+  settings,
+  client
 });
 
 export default reducers;

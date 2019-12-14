@@ -24,10 +24,10 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    marginLeft: theme.spacing.unit * 9,
-    padding: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit,
-    marginTop: theme.spacing.unit * 0,
+    marginLeft: theme.spacing(9),
+    padding: theme.spacing(3),
+    paddingTop: theme.spacing,
+    marginTop: theme.spacing * 0,
     overflowX: "hidden"
   },
   contentShift: {
