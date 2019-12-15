@@ -20,26 +20,4 @@ const Home = props => {
   );
 };
 
-/*
-const mapStateToProps = state => {
-  return {
-    stepCounter: state.stepCounter
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      increment: () => increment(),
-      decrement: () => decrement()
-    },
-    dispatch
-  );
-};*/
-/*
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);*/
-
 export default Home;

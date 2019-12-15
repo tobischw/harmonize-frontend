@@ -18,9 +18,6 @@ import EmptyLayout from "./layouts/EmptyLayout";
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 
-import { bindActionCreators } from "redux";
-import { joinChannel } from "./store/actions";
-
 import theme from "./theme"
 import AudioClient from "./components/Channel/AudioClient";
 
@@ -55,26 +52,17 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 };
 
 class App extends Component {
-  componentWillReceiveProps(nextProps) {
-    // If no channel is initialized, try to join a channel.
-    if(nextProps.connected && nextProps.channelId === -1) {
-      this.props.joinChannel(0, 0);
-    }
-  }
-
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <div style={{ height: "100vh" }}>
-          <AudioClient />
           <Snackbar
               message={<span id="snackbar-fab-message-id">No connection to server.</span>}
               open={!this.props.connected}
             />
           <Router>
             <Switch>
-              <DashboardRoute path="/dashboard" component={Home} />
               <DashboardRoute path="/setting" component={Setting} />
               <DashboardRoute exact path="/" component={Channel} />
               <EmptyRoute component={NotFound} />
@@ -88,23 +76,10 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    song: state.sync.song,
-    connected: state.connection.connected,
-    channelId: state.sync.channelId
+    song: state.sync.song
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      joinChannel: (channelId, userId) => dispatch(joinChannel(channelId, userId))
-    },
-    dispatch
-  );
-};
-
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(App);
