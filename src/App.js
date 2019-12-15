@@ -76,7 +76,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    song: state.sync.song
+    song: state.sync.song,
+    connected: state.connection.connected
   };
 };
 
