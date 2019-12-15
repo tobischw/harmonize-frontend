@@ -87,6 +87,8 @@ function mapStateToProps(state) {
     isFetching,
     lastUpdated
   }*/
+
+  return {}
 }
 
 export default connect(mapStateToProps)(App)

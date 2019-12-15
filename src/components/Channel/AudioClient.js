@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 class AudioClient extends React.Component {
     componentDidMount() {
         console.log("Mounted audio client.");
-
         // TODO: Start audio context here.
     }
 

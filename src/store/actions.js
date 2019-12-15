@@ -1,6 +1,12 @@
 // Action Types
-export const CONNECT_SERVER = 'CONNECT_SERVER'
+export const JOIN_CHANNEL = 'JOIN_CHANNEL'
 
-export function connectServer(url) {
+export const EVENTS = [ JOIN_CHANNEL ]
 
-}
+export function joinChannel() {
+    return {
+      event: 'message',
+      handle: NEW_MESSAGE,
+    }
+  }
+  

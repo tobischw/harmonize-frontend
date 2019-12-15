@@ -34,16 +34,6 @@ const styles = theme => ({
 const Channel = props => {
     const { classes } = props;
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = event => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-
     return (
         <Grid container className={classes.root}>
           <Grid container>
