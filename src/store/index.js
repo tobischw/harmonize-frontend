@@ -5,6 +5,6 @@ import ReduxWebSocketBridge from 'redux-websocket-bridge';
 import rootReducer from "./reducers";
 
 export default createStore(
-    rootReducer, 
+    rootReducer,
     applyMiddleware(ReduxWebSocketBridge('ws://localhost:8080/'), logger)
 );

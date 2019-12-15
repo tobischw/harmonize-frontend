@@ -62,7 +62,7 @@ const AlbumArt = props => {
                         { props.title }
                     </Typography>
                     <Typography variant="subtitle1" color="textSecondary">
-                        { props.artist }
+                        { props.artist } • { props.album }
                     </Typography>
                 </CardContent>
                 { props.withControls &&

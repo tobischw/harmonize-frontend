@@ -18,7 +18,11 @@ import EmptyLayout from "./layouts/EmptyLayout";
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 
+import { bindActionCreators } from "redux";
+import { joinChannel } from "./store/actions";
+
 import theme from "./theme"
+import AudioClient from "./components/Channel/AudioClient";
 
 const NotFound = () => {
   return <div>Not Found</div>;
@@ -51,8 +55,11 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 };
 
 class App extends Component {
-  componentDidMount() {
-    
+  componentWillReceiveProps(nextProps) {
+    // If no channel is initialized, try to join a channel.
+    if(nextProps.connected && nextProps.channelId === -1) {
+      this.props.joinChannel(0, 0);
+    }
   }
 
   render() {
@@ -60,6 +67,11 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <div style={{ height: "100vh" }}>
+          <AudioClient />
+          <Snackbar
+              message={<span id="snackbar-fab-message-id">No connection to server.</span>}
+              open={!this.props.connected}
+            />
           <Router>
             <Switch>
               <DashboardRoute path="/dashboard" component={Home} />
@@ -67,10 +79,6 @@ class App extends Component {
               <DashboardRoute exact path="/" component={Channel} />
               <EmptyRoute component={NotFound} />
             </Switch>
-            <Snackbar
-              message={<span id="snackbar-fab-message-id">No connection to server.</span>}
-              open={this.props.showDisconnect}
-            />
           </Router>
         </div>
       </MuiThemeProvider>
@@ -80,10 +88,23 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    showDisconnect: !state.connection.connected
+    song: state.sync.song,
+    connected: state.connection.connected,
+    channelId: state.sync.channelId
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      joinChannel: (channelId, userId) => dispatch(joinChannel(channelId, userId))
+    },
+    dispatch
+  );
+};
+
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App);
