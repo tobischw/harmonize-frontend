@@ -55,6 +55,8 @@ wss.on('connection', function connection(ws) {
                     song: oliverTree,
                     channelID: 1,
                     offset: Date.now() - data.join_timestamp,
+                    startTime: startTime,
+                    duration: audioLength,
                     timestamp: Date.now()
                 }
             }));
@@ -62,10 +64,20 @@ wss.on('connection', function connection(ws) {
             ws.send(JSON.stringify({
                 type: 'SYNC/PACKET',
                 payload: {
-                    timecode: timecode,
+                    timecode: timecode + (Date.now() - data.join_timestamp),
                     timestamp: Date.now()
                 }
             }));
+
+            /*setInterval(function() {
+                ws.send(JSON.stringify({
+                    type: 'SYNC/PACKET',
+                    payload: {
+                        timecode: timecode,
+                        timestamp: Date.now()
+                    }
+                }));
+            }, 2000);*/
 
         }
     }

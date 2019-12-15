@@ -12,6 +12,8 @@ const syncState = {
     channelId: -1,
     timecode: 0,
     timeOffset: 0,
+    startTime: 0,
+    duration: 0,
     playStatus: Sound.status.PLAYING,
     song: {
         title: "---",
@@ -30,11 +32,21 @@ function syncClient(state = syncState, action) {
     switch(action.type) {
         case CHANNEL_INFO:
             console.log("RECEIVED CHANNEL INFO");
-            state = { ...state, song: action.payload.song, channelId: action.payload.channelId, timeOffset: action.payload.offset };
+            state = { ...state, song: action.payload.song, channelId: action.payload.channelId, timeOffset: action.payload.offset, startTime: action.payload.startTime, duration: action.payload.duration };
             break;
         case SYNC_PACKET:
-            let trueTime = action.payload.timecode + (Date.now() - (action.payload.timestamp + state.timeOffset));
-            state = { ...state, timecode: trueTime };
+            /* attempt #1 : */
+            /*let realOffset = action.payload.timecode + (Date.now() - (action.payload.timestamp + state.timeOffset));
+            
+            let sourceElapsed = Date.now() - state.startTime + action.payload.timecode;
+            let sourceWrap = Math.abs(sourceElapsed % (state.duration));
+
+            let time = Math.abs(realOffset - sourceWrap);
+            
+            state = { ...state, timecode: time };*/
+
+            /* if that does not work well... */
+            state = { ...state, timecode: action.payload.timecode };
             break;
     }
     return state;
