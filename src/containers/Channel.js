@@ -5,17 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 import Paper from '@material-ui/core/Paper';
 import AlbumArt from "../components/Channel/AlbumArt";
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
 import Link from '@material-ui/core/Link';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import AudioClient from "../components/Channel/AudioClient";
+
+import { connect } from "react-redux";
 
 const styles = theme => ({
     root: {
@@ -40,7 +34,7 @@ const Channel = props => {
             <Breadcrumbs separator="›" className={classes.breadcrumbs} aria-label="breadcrumb">
               <Link color="inherit" href="/">
                 Cool Gang
-              </Link>         
+              </Link>
               <Link
                 color="textPrimary"
                 href="/components/breadcrumbs/"
@@ -53,7 +47,7 @@ const Channel = props => {
           <Grid container alignContent="center" style={{height: "100%"}}>
             <Grid item xs={5}>
               <AudioClient />
-              <AlbumArt title="California Halo Blue" artist="AWOLNATION" withControls />
+              <AlbumArt title={props.song.title} artist={props.song.artist} art={props.song.art} withControls />
             </Grid>
             <Grid item xs={7}>
             </Grid>
@@ -62,4 +56,12 @@ const Channel = props => {
     );
 };
 
-export default withStyles(styles)(Channel);
+const mapStateToProps = state => {
+  return {
+    song: state.sync.song
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(withStyles(styles)(Channel));

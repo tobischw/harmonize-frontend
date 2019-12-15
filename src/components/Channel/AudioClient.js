@@ -1,4 +1,6 @@
 import React from "react";
+import Sound from "react-sound"
+
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -9,27 +11,27 @@ class AudioClient extends React.Component {
     }
 
     render() {
-        return null;
+        return <Sound playFromPosition={this.props.timecode} />;
     }
 }
 
 const mapStateToProps = state => {
     return {
-     // client: state.client
+        timecode: state.sync.timecode
     };
-  };
+};
   
-  const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return bindActionCreators(
       {
         /*toggleThemeMode: checked => toggleThemeMode(checked)*/
       },
       dispatch
     );
-  };
+};
   
-  export default connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AudioClient);
+)(AudioClient);
   

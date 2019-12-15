@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 
 import Sidebar from "../components/Sidebar";
+import { connect } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -56,7 +57,7 @@ class MainLayout extends Component {
     return (
       <Fragment>
         <div className={classes.root}>
-          <div className={classes.backdrop}></div>
+          <div className={classes.backdrop} style={{ backgroundImage: 'url(' + this.props.backgroundImage + ')' }}></div>
           <main
             className={classNames(classes.content, {
               [classes.contentShift]: this.state.open
@@ -71,4 +72,12 @@ class MainLayout extends Component {
   }
 }
 
-export default withStyles(styles)(MainLayout);
+const mapStateToProps = state => {
+  return {
+    backgroundImage: state.sync.song.art
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(withStyles(styles)(MainLayout));

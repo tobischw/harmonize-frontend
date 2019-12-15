@@ -53,7 +53,7 @@ const AlbumArt = props => {
         <Card className={classes.card}>
             <CardMedia
                 className={classes.cover}
-                image="https://m.media-amazon.com/images/I/51NLJmj8YqL._SS500_.jpg"
+                image={props.art}
                 title="Live from space album cover"
             />
             <div className={classes.details}>

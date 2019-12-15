@@ -15,6 +15,9 @@ import Setting from "./containers/Setting";
 import MainLayout from "./layouts/MainLayout";
 import EmptyLayout from "./layouts/EmptyLayout";
 
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+
 import theme from "./theme"
 
 const NotFound = () => {
@@ -49,8 +52,7 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 
 class App extends Component {
   componentDidMount() {
-    //const { dispatch } = this.props
-    //dispatch
+    
   }
 
   render() {
@@ -65,6 +67,10 @@ class App extends Component {
               <DashboardRoute exact path="/" component={Channel} />
               <EmptyRoute component={NotFound} />
             </Switch>
+            <Snackbar
+              message={<span id="snackbar-fab-message-id">No connection to server.</span>}
+              open={this.props.showDisconnect}
+            />
           </Router>
         </div>
       </MuiThemeProvider>
@@ -72,23 +78,12 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  /*const { selectedSubreddit, postsBySubreddit } = state
-  const { isFetching, lastUpdated, items: posts } = postsBySubreddit[
-    selectedSubreddit
-  ] || {
-    isFetching: true,
-    items: []
-  }
-
+const mapStateToProps = state => {
   return {
-    selectedSubreddit,
-    posts,
-    isFetching,
-    lastUpdated
-  }*/
+    showDisconnect: !state.connection.connected
+  };
+};
 
-  return {}
-}
-
-export default connect(mapStateToProps)(App)
+export default connect(
+  mapStateToProps
+)(App);

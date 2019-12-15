@@ -1,22 +1,37 @@
 import { combineReducers } from 'redux'
 import { OPEN, CLOSE, MESSAGE } from 'redux-websocket-bridge';
 
-const initState = {
-    connected: false
+const connectionState = {
+    connected: false,
+    clientId: -1
+};
+
+const syncState = {
+    timecode: 0,
+    song: {
+        title: "---",
+        artist: "---",
+        source: null,
+        art: ""
+    }
 }
 
-const SERVER_GREETING = 'SERVER_GREETING';
+const CHANNEL_INFO = 'CHANNEL/INFO';
+const SYNC_PACKET = 'SYNC/PACKET';
 
-function syncClient(state = initState, action) {
+function syncClient(state = syncState, action) {
     switch(action.type) {
-        case SERVER_GREETING:
-            console.log("Received greeting");
-            return state;
+        case CHANNEL_INFO:
+            state = { ...state, song: action.payload.song };
+            break;
+        case SYNC_PACKET:
+            state = { ...state, timecode: action.payload.timecode };
+            break;
     }
     return state;
 }
 
-function serverConnectivity(state = initState, action) {
+function serverConnectivity(state = connectionState, action) {
     switch (action.type) {
         case `@@websocket/${ OPEN }`:
             console.log("ws open");
@@ -39,6 +54,6 @@ function serverConnectivity(state = initState, action) {
 }
 
 export default combineReducers({
-    syncClient,
-    serverConnectivity
+    sync: syncClient,
+    connection: serverConnectivity
 });
