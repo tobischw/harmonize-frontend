@@ -11,10 +11,9 @@ const connectionState = {
 const syncState = {
     channelId: -1,
     timecode: 0,
-    timeOffset: 0,
-    startTime: 0,
-    duration: 0,
+    offset: 0,
     playStatus: Sound.status.PLAYING,
+    votedOn: -1,
     song: {
         title: "---",
         artist: "---",
@@ -34,9 +33,8 @@ function syncClient(state = syncState, action) {
             state = { ...state,
                  song: action.payload.song,
                  channelId: action.payload.channelId,
-                 timeOffset: action.payload.offset,
-                 startTime: action.payload.startTime,
-                 duration: action.payload.duration };
+                 offset: action.payload.offset
+                };
             break;
         case SYNC_PACKET:
             /* attempt #1 : */
@@ -50,7 +48,10 @@ function syncClient(state = syncState, action) {
             state = { ...state, timecode: time };*/
 
             /* if that does not work well... */
-            state = { ...state, timecode: action.payload.timecode };
+
+            let realPos = action.payload.timecode + (Date.now() - (action.payload.timestamp + state.offset));
+
+            state = { ...state, timecode: realPos };
             break;
     }
     return state;

@@ -9,7 +9,7 @@ import Link from '@material-ui/core/Link';
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import AudioClient from "../components/Channel/AudioClient";
 import { bindActionCreators } from "redux";
-import { joinChannel } from "../store/actions";
+import { joinChannel, voteSong } from "../store/actions";
 import { connect } from "react-redux";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -80,7 +80,7 @@ class Channel extends React.Component {
                 { 
                 [...Array(6)].map((e, i) => 
                   <GridListTile height="100%" className={classes.songTile} boxShadow={1}>
-                    <AlbumArt title={this.props.song.title} artist={this.props.song.artist} album={this.props.song.album} art={this.props.song.art} votable />
+                    <AlbumArt key={i} onClick={this.props.voteSong} title={this.props.song.title} artist={this.props.song.artist} album={this.props.song.album} art={this.props.song.art} />
                   </GridListTile>
                 )}
               </GridList>
@@ -103,7 +103,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      joinChannel: (channelId, userId) => dispatch(joinChannel(channelId, userId))
+      joinChannel: (channelId, userId) => dispatch(joinChannel(channelId, userId)),
+      voteSong: (userId, songId) => dispatch(voteSong(userId, songId))
     },
     dispatch
   );

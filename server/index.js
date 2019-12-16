@@ -22,6 +22,8 @@ const oliverTree = {
     art: "https://i1.sndcdn.com/artworks-000347035692-n5238t-t500x500.jpg"
 }
 
+var once = false;
+
 wss.broadcast = function broadcast(msg) {
     console.log(msg);
     wss.clients.forEach(function each(client) {
@@ -37,6 +39,7 @@ wss.on('connection', function connection(ws) {
 
     var data = JSON.parse(message);
     if(data.type === "CHANNEL/JOIN") {
+            once = true;
             console.log("sending back channel info");
 
             let timecode = (Date.now() - startTime) % audioLength;
@@ -53,8 +56,6 @@ wss.on('connection', function connection(ws) {
                     song: oliverTree,
                     channelID: 1,
                     offset: Date.now() - data.join_timestamp,
-                    startTime: startTime,
-                    duration: audioLength,
                     timestamp: Date.now()
                 }
             }));
@@ -67,28 +68,21 @@ wss.on('connection', function connection(ws) {
                 }
             }));
 
-            /*setInterval(function() {
-                ws.send(JSON.stringify({
-                    type: 'SYNC/PACKET',
-                    payload: {
-                        timecode: timecode,
-                        timestamp: Date.now()
-                    }
-                }));
-            }, 2000);*/
     }
   });
 
-  //ws.send('something');
-   /* console.log("active seek=" + start);
-    ws.send(JSON.stringify({
-        type: 'SYNC/PACKET',
-        payload: { 
-            timecode: start
-      }  }));*/
 });
 
 setInterval(function() {
-   // let timecode = (Date.now() - startTime) % audioLength;
-   // console.log(timecode);
-  }, 100);
+    if(once) {
+        let timecode = (Date.now() - startTime) % audioLength;
+        wss.broadcast(JSON.stringify({
+            type: 'SYNC/PACKET',
+            payload: {
+                timecode: timecode - (timecode * 0.005), /*+ (Date.now() - data.join_timestamp)*/
+                timestamp: Date.now()
+            }
+        }));
+        once = false;
+    }
+}, 5000);

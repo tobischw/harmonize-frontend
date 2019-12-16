@@ -61,7 +61,7 @@ const AlbumArt = props => {
                 className={classes.cover}  
                 title="Live from space album cover">
                 <img src={props.art} width="100%" />
-                { props.votable &&
+                { props.voted &&
                 <div className={classes.votable}>
                     <ThumbUpIcon fontSize="large" />
                 </div>
