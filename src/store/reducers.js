@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
-import { OPEN, CLOSE, MESSAGE } from 'redux-websocket-bridge';
-import Sound from "react-sound"
+import { combineReducers } from "redux";
+import { OPEN, CLOSE, MESSAGE } from "redux-websocket-bridge";
+import Sound from "react-sound";
 
 /* STATES */
 const connectionState = {
@@ -22,21 +22,22 @@ const syncState = {
         source: null,
         art: ""
     }
-}
+};
 
 /* CHANNELS */
-const CHANNEL_INFO = 'CHANNEL/INFO';
-const SYNC_PACKET = 'SYNC/PACKET';
+const CHANNEL_INFO = "CHANNEL/INFO";
+const SYNC_PACKET = "SYNC/PACKET";
 
 function syncClient(state = syncState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case CHANNEL_INFO:
-            state = { ...state,
-                 song: action.payload.song,
-                 channelId: action.payload.channelId,
-                 offset: action.payload.offset,
-                 votes: action.payload.votes
-                };
+            state = {
+                ...state,
+                song: action.payload.song,
+                channelId: action.payload.channelId,
+                offset: action.payload.offset,
+                votes: action.payload.votes
+            };
             break;
         case SYNC_PACKET:
             /* attempt #1 : */
@@ -61,20 +62,21 @@ function syncClient(state = syncState, action) {
 
 function serverConnectivity(state = connectionState, action) {
     switch (action.type) {
-        case `@@websocket/${ OPEN }`:
+        case `@@websocket/${OPEN}`:
             state = { ...state, connected: true };
             break;
-    
-        case `@@websocket/${ CLOSE }`:
+
+        case `@@websocket/${CLOSE}`:
             state = { ...state, connected: false };
             break;
-    
-        case `@@websocket/${ MESSAGE }`:
+
+        case `@@websocket/${MESSAGE}`:
             break;
-    
-        default: break;
+
+        default:
+            break;
     }
-   
+
     return state;
 }
 

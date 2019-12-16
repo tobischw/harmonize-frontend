@@ -1,0 +1,8 @@
+.voteSong:hover {
+    background: #87d37c94 !important;
+    cursor: pointer;
+}
+
+.selected {
+    background: #87d37c94 !important;
+}

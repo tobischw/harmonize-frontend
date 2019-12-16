@@ -7,17 +7,16 @@ import Typography from "@material-ui/core/Typography";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-const Home = props => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    > 
-    </div>
-  );
+const Home = (props) => {
+    return (
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }}
+        ></div>
+    );
 };
 
 export default Home;
