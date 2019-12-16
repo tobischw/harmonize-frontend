@@ -6,7 +6,6 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 export default createMuiTheme({
     typography: {
       fontFamily: [
-        'Titillium Web',
         'BlinkMacSystemFont',
         '"Segoe UI"',
         'Roboto',

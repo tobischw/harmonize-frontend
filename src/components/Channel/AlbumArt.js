@@ -5,7 +5,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import VolumeMuteIcon from '@material-ui/icons/VolumeMute';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import { withRouter } from 'react-router-dom';
@@ -18,8 +18,6 @@ const styles = theme => ({
     card: {
         display: 'flex',
         flexDirection: 'column',
-        height: theme.spacing(64),
-        width:  theme.spacing(48)
     },
     details: {
         display: 'flex',
@@ -50,12 +48,13 @@ const styles = theme => ({
 const AlbumArt = props => {
     const { open, classes } = props;
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} elevated>
             <CardMedia
-                className={classes.cover}
-                image={props.art}
+                className={classes.cover}  
                 title="Live from space album cover"
-            />
+            >
+                <img src={props.art} width="100%" />
+            </CardMedia>
             <div className={classes.details}>
                 <CardContent className={classes.content}>
                     <Typography component="h5" variant="h5">
@@ -70,8 +69,8 @@ const AlbumArt = props => {
                     <IconButton aria-label="thumb-down">
                         <ThumbDownIcon />
                     </IconButton>
-                    <IconButton aria-label="play/pause">
-                        <PlayArrowIcon className={classes.playIcon} />
+                    <IconButton aria-label="mute">
+                        <VolumeMuteIcon className={classes.playIcon} />
                     </IconButton>
                     <IconButton aria-label="thumb-up">
                         <ThumbUpIcon />
