@@ -18,6 +18,7 @@ const oliverTree = {
     title: "Movement",
     artist: "Oliver Tree",
     album: "Movement",
+    duration: 163000,
     source: "http://localhost:4001/audio/movement.mp3",
     art: "https://i1.sndcdn.com/artworks-000347035692-n5238t-t500x500.jpg"
 }
@@ -54,7 +55,7 @@ wss.on('connection', function connection(ws) {
                 type: 'CHANNEL/INFO',
                 payload: {
                     song: oliverTree,
-                    votes: [ flowerboy ],
+                    votes: [ flowerboy, flowerboy ],
                     channelID: 1,
                     offset: Date.now() - data.join_timestamp,
                     timestamp: Date.now()
@@ -65,14 +66,14 @@ wss.on('connection', function connection(ws) {
 
             console.log(msg)
 
-            ws.send(JSON.stringify({
-                type: 'SYNC/PACKET',
-                payload: {
-                    timecode: timecode + (Date.now() - data.join_timestamp),
-                    timestamp: Date.now()
-                }
-            }));
-
+            setInterval(function() {
+                ws.send(JSON.stringify({
+                    type: 'SYNC/PACKET',
+                    payload: {
+                        timecode: timecode + (Date.now() - data.join_timestamp),
+                        timestamp: Date.now()
+                    }
+                }))}, 5000);
     }
   });
 

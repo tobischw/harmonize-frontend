@@ -12,8 +12,10 @@ const syncState = {
     channelId: -1,
     timecode: 0,
     offset: 0,
+    initialSync: false,
     playStatus: Sound.status.PLAYING,
     votedOn: -1,
+    startTime: 0,
     votes: [],
     song: {
         title: "---",
@@ -36,25 +38,28 @@ function syncClient(state = syncState, action) {
                 song: action.payload.song,
                 channelId: action.payload.channelId,
                 offset: action.payload.offset,
-                votes: action.payload.votes
+                votes: action.payload.votes,
+                startTime: Date.now()
             };
             break;
         case SYNC_PACKET:
             /* attempt #1 : */
-            /*let realOffset = action.payload.timecode + (Date.now() - (action.payload.timestamp + state.timeOffset));
+            //let realOffset = action.payload.timecode + (Date.now() - (action.payload.timestamp + state.timeOffset));
             
-            let sourceElapsed = Date.now() - state.startTime + action.payload.timecode;
-            let sourceWrap = Math.abs(sourceElapsed % (state.duration));
+            let pos = action.payload.timecode + (Date.now() - (action.payload.timestamp + state.offset));
 
-            let time = Math.abs(realOffset - sourceWrap);
-            
-            state = { ...state, timecode: time };*/
+            let sourceElapsed = Date.now() - state.startTime + pos;
+            let sourceWrap = Math.abs(sourceElapsed % (state.song.duration));
+
+            let offset = Math.abs(pos - sourceWrap);
 
             /* if that does not work well... */
 
-            let realPos = action.payload.timecode + (Date.now() - (action.payload.timestamp + state.offset));
+            if(!state.initialSync || offset > 0.005) {
+                console.log("SYNCED!");
+                state = { ...state, timecode: pos, initialSync: true };
+            }
 
-            state = { ...state, timecode: realPos };
             break;
     }
     return state;
