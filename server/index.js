@@ -50,15 +50,20 @@ wss.on('connection', function connection(ws) {
 
             console.log(timecode);
 
-            ws.send(JSON.stringify({
+            var msg = JSON.stringify({
                 type: 'CHANNEL/INFO',
                 payload: {
                     song: oliverTree,
+                    votes: [ flowerboy ],
                     channelID: 1,
                     offset: Date.now() - data.join_timestamp,
                     timestamp: Date.now()
                 }
-            }));
+            });
+
+            ws.send(msg);
+
+            console.log(msg)
 
             ws.send(JSON.stringify({
                 type: 'SYNC/PACKET',

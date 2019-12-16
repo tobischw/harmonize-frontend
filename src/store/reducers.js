@@ -14,6 +14,7 @@ const syncState = {
     offset: 0,
     playStatus: Sound.status.PLAYING,
     votedOn: -1,
+    votes: [],
     song: {
         title: "---",
         artist: "---",
@@ -33,7 +34,8 @@ function syncClient(state = syncState, action) {
             state = { ...state,
                  song: action.payload.song,
                  channelId: action.payload.channelId,
-                 offset: action.payload.offset
+                 offset: action.payload.offset,
+                 votes: action.payload.votes
                 };
             break;
         case SYNC_PACKET:
