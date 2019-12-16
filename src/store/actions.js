@@ -8,7 +8,7 @@ export function joinChannel(channelId, userId) {
         id: channelId,
         join_client_id: userId,
         join_timestamp: Date.now()
-    }
+    };
 }
 
 export function voteSong(clientId, songId) {
@@ -17,5 +17,5 @@ export function voteSong(clientId, songId) {
         meta: { send: true },
         songId: songId,
         clientId: clientId
-    }
+    };
 }
