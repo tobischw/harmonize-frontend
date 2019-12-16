@@ -1,10 +1,9 @@
-export const CHANNEL_ACTION = "CHANNEL";
+export const CHANNEL_JOIN = "CHANNEL/JOIN";
 
 export function joinChannel(channelId, userId) {
     return {
-        type: CHANNEL_ACTION,
+        type: CHANNEL_JOIN,
         meta: { send: true },
-        action: 'join',
         id: channelId,
         join_client_id: userId,
         join_timestamp: Date.now()

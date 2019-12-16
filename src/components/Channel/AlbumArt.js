@@ -29,8 +29,6 @@ const styles = theme => ({
     },
     cover: {     
         display: 'flex',
-        width: "100%",
-        height: "100%"
     },
     controls: {
         display: 'flex',
@@ -43,6 +41,16 @@ const styles = theme => ({
         height: 38,
         width: 38,
     },
+    votable: {
+        background: 'rgba(97, 97, 97, 0.5)',
+        position: 'absolute',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        zIndex: 5
+    }
 });
 
 const AlbumArt = props => {
@@ -51,9 +59,13 @@ const AlbumArt = props => {
         <Card className={classes.card} elevated>
             <CardMedia
                 className={classes.cover}  
-                title="Live from space album cover"
-            >
+                title="Live from space album cover">
                 <img src={props.art} width="100%" />
+                { props.votable &&
+                <div className={classes.votable}>
+                    <ThumbUpIcon fontSize="large" />
+                </div>
+                }
             </CardMedia>
             <div className={classes.details}>
                 <CardContent className={classes.content}>

@@ -41,9 +41,6 @@ const styles = theme => ({
     },
     songTile: {
       height: 'inherit'
-    },
-    centeredGrid: {
-      
     }
 });
 
@@ -83,7 +80,7 @@ class Channel extends React.Component {
                 { 
                 [...Array(6)].map((e, i) => 
                   <GridListTile height="100%" className={classes.songTile} boxShadow={1}>
-                    <AlbumArt title={this.props.song.title} artist={this.props.song.artist} album={this.props.song.album} art={this.props.song.art} />
+                    <AlbumArt title={this.props.song.title} artist={this.props.song.artist} album={this.props.song.album} art={this.props.song.art} votable />
                   </GridListTile>
                 )}
               </GridList>

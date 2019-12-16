@@ -36,9 +36,7 @@ wss.on('connection', function connection(ws) {
     //console.log('received: %s', message);
 
     var data = JSON.parse(message);
-    if(data.type === "CHANNEL") {
-
-        if(data.action === "join") {   
+    if(data.type === "CHANNEL/JOIN") {
             console.log("sending back channel info");
 
             let timecode = (Date.now() - startTime) % audioLength;
@@ -78,8 +76,6 @@ wss.on('connection', function connection(ws) {
                     }
                 }));
             }, 2000);*/
-
-        }
     }
   });
 

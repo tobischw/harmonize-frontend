@@ -31,8 +31,12 @@ const SYNC_PACKET = 'SYNC/PACKET';
 function syncClient(state = syncState, action) {
     switch(action.type) {
         case CHANNEL_INFO:
-            console.log("RECEIVED CHANNEL INFO");
-            state = { ...state, song: action.payload.song, channelId: action.payload.channelId, timeOffset: action.payload.offset, startTime: action.payload.startTime, duration: action.payload.duration };
+            state = { ...state,
+                 song: action.payload.song,
+                 channelId: action.payload.channelId,
+                 timeOffset: action.payload.offset,
+                 startTime: action.payload.startTime,
+                 duration: action.payload.duration };
             break;
         case SYNC_PACKET:
             /* attempt #1 : */
