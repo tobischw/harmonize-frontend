@@ -78,7 +78,7 @@ class Channel extends React.Component {
             <Grid item xs={7} style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} className={classes.voteGrid}>
               <GridList height="100%" className={classes.gridList} cols={2.3} spacing={20} cellHeight="auto" style={{padding: 20}}>
                 {this.props.votes.map((song, key) =>          
-                  <GridListTile key={key} onClick={this.props.voteSong(0, key)} height="100%" className={classes.songTile} boxShadow={1}>
+                  <GridListTile key={key} height="100%" className={classes.songTile} boxShadow={1}>
                     <AlbumArt title={song.title} artist={song.artist} album={song.album} art={song.art} />
                   </GridListTile>
                 )}
